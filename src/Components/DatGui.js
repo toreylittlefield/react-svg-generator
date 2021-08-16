@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
 import DatGui, {
   DatBoolean,
   DatFolder,
@@ -7,25 +7,8 @@ import DatGui, {
 } from 'react-dat-gui';
 import 'react-dat-gui/dist/index.css';
 
-const initialSettings = {
-  lines: 20,
-  amplitudeX: 100,
-  amplitudeY: 20,
-  offsetX: 10,
-  smoothness: 3,
-  fill: true,
-  crazyness: false,
-  hueStartColor: 53,
-  saturationStartColor: 74,
-  lightnessStartColor: 67,
-  hueEndColor: 216,
-  saturationEndColor: 100,
-  lightnessEndColor: 7,
-};
-
-const DatGuiComponent = () => {
-  const [guiData, setGuiData] = useState(initialSettings);
-
+const DatGuiComponent = ({ guiData, setGuiData }) => {
+  //   const [guiData, setGuiData] = useState(initialSettings);
   const handleRandomize = () => {
     setGuiData({
       lines: parseInt(5 + Math.random() * 45),
@@ -134,3 +117,40 @@ const DatGuiComponent = () => {
 };
 
 export default DatGuiComponent;
+
+DatGuiComponent.propTypes = {
+  guiData: PropTypes.shape({
+    lines: PropTypes.number.isRequired,
+    amplitudeX: PropTypes.number.isRequired,
+    amplitudeY: PropTypes.number.isRequired,
+    offsetX: PropTypes.number.isRequired,
+    smoothness: PropTypes.number.isRequired,
+    fill: PropTypes.bool.isRequired,
+    crazyness: PropTypes.bool.isRequired,
+    hueStartColor: PropTypes.number.isRequired,
+    saturationStartColor: PropTypes.number.isRequired,
+    lightnessStartColor: PropTypes.number.isRequired,
+    hueEndColor: PropTypes.number.isRequired,
+    saturationEndColor: PropTypes.number.isRequired,
+    lightnessEndColor: PropTypes.number.isRequired,
+  }),
+  setGuiData: PropTypes.func.isRequired,
+};
+
+DatGuiComponent.defaultProps = {
+  guiData: {
+    lines: 20,
+    amplitudeX: 100,
+    amplitudeY: 20,
+    offsetX: 10,
+    smoothness: 3,
+    fill: true,
+    crazyness: false,
+    hueStartColor: 53,
+    saturationStartColor: 74,
+    lightnessStartColor: 67,
+    hueEndColor: 216,
+    saturationEndColor: 100,
+    lightnessEndColor: 7,
+  },
+};
