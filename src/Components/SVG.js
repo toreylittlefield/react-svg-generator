@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DatGuiComponent from './DatGui';
+import GenerateSVG from './GenerateSVG';
 
 const initialSettings = {
   lines: 20,
@@ -19,7 +20,12 @@ const initialSettings = {
 
 const SVG = () => {
   const [guiData, setGuiData] = useState(initialSettings);
-  return <DatGuiComponent guiData={guiData} setGuiData={setGuiData} />;
+  return (
+    <main>
+      <DatGuiComponent guiData={guiData} setGuiData={setGuiData} />
+      <GenerateSVG guiData={guiData} />
+    </main>
+  );
 };
 
 export default SVG;
