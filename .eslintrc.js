@@ -23,6 +23,7 @@ module.exports = {
     'react/forbid-prop-types': 0,
     'react/jsx-filename-extension': 0,
     'react/react-in-jsx-scope': 0,
+    radix: [2, 'as-needed'],
     'class-methods-use-this': 0,
     'no-unused-expressions': ['error', { allowTaggedTemplates: true }],
     'react/no-unused-prop-types': 0,
