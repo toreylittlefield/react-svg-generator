@@ -11,3 +11,75 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+  background: url(https://github.com/supahfunk/gradientwaves-svg/blob/master/dist/img/bg-gradient-wave.png?raw=true)
+    repeat center/cover;
+}
+
+svg {
+  width: 300vw;
+  height: 100vh;
+}
+svg.path path {
+  stroke: none;
+}
+svg.stroke path {
+  fill: none;
+  stroke-width: 1px;
+}
+svg .circle {
+  fill: #fff;
+}
+
+.the-most {
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  width: 50vw;
+  max-width: 100px;
+  padding: 10px;
+}
+.the-most img {
+  max-width: 100%;
+}
+
+button {
+  padding: 1em;
+  margin: 0;
+  outline: none;
+  border: none;
+  background-color: rebeccapurple;
+  color: white;
+  border-radius: 0.5em;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: opacity 400ms, transform 400ms;
+}
+
+button:hover {
+  opacity: 0.8;
+  transform: scale(1.02);
+}
+
+button:active,
+button:focus {
+  transform: scale(0.98);
+  opacity: 1;
+  background-color: rgba(64, 191, 128, 0.8);
+}
