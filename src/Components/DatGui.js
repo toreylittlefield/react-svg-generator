@@ -45,7 +45,7 @@ const DatGuiComponent = () => {
   };
 
   return (
-    <div>
+    <nav className="dat-gui">
       <DatGui data={guiData} onUpdate={setGuiData}>
         <DatFolder title="Settings">
           <DatNumber path="lines" label="Lines" min={5} max={50} step={1} />
@@ -129,7 +129,7 @@ const DatGuiComponent = () => {
         <DatButton label="Randomize" onClick={handleRandomize} />
         <DatButton label="Export SVG" />
       </DatGui>
-    </div>
+    </nav>
   );
 };
 
