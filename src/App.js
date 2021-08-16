@@ -1,9 +1,9 @@
 import './App.css';
-import DatGuiComponent from './Components/DatGui';
+import SVG from './Components/SVG';
 
 const App = () => (
   <div className="App">
-    <DatGuiComponent />
+    <SVG />
   </div>
 );
 
