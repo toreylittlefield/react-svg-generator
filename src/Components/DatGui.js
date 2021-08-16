@@ -26,6 +26,24 @@ const initialSettings = {
 const DatGuiComponent = () => {
   const [guiData, setGuiData] = useState(initialSettings);
 
+  const handleRandomize = () => {
+    setGuiData({
+      lines: parseInt(5 + Math.random() * 45),
+      amplitudeX: parseInt(20 + Math.random() * 300),
+      amplitudeY: parseInt(Math.random() * 200),
+      hueStartColor: parseInt(Math.random() * 360),
+      saturationStartColor: 74,
+      lightnessStartColor: 67,
+      hueEndColor: parseInt(Math.random() * 360),
+      saturationEndColor: 90,
+      lightnessEndColor: 14,
+      smoothness: 1 + parseInt(Math.random() * 9),
+      offsetX: parseInt(-20 + Math.random() * 40),
+      fill: Math.random() * 1 > 0.3,
+      crazyness: Math.random() * 1 > 0.9,
+    });
+  };
+
   return (
     <div>
       <DatGui data={guiData} onUpdate={setGuiData}>
@@ -108,7 +126,7 @@ const DatGuiComponent = () => {
             step={1}
           />
         </DatFolder>
-        <DatButton label="Randomize" />
+        <DatButton label="Randomize" onClick={handleRandomize} />
         <DatButton label="Export SVG" />
       </DatGui>
     </div>
