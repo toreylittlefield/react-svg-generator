@@ -47,18 +47,18 @@ GenerateSVG.propTypes = {
 
 GenerateSVG.defaultProps = {
   guiData: {
-    lines: 20,
-    amplitudeX: 100,
-    amplitudeY: 20,
-    offsetX: 10,
-    smoothness: 3,
-    fill: true,
+    lines: 42,
+    amplitudeX: 56,
+    amplitudeY: 54,
+    offsetX: 0,
+    smoothness: 9.0,
+    fill: false,
     crazyness: false,
-    hueStartColor: 53,
+    hueStartColor: 48,
     saturationStartColor: 74,
     lightnessStartColor: 67,
-    hueEndColor: 216,
-    saturationEndColor: 100,
-    lightnessEndColor: 7,
+    hueEndColor: 203,
+    saturationEndColor: 90,
+    lightnessEndColor: 14,
   },
 };
