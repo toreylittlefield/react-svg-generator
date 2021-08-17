@@ -7,8 +7,7 @@ import DatGui, {
 } from 'react-dat-gui';
 import 'react-dat-gui/dist/index.css';
 
-const DatGuiComponent = ({ guiData, setGuiData }) => {
-  //   const [guiData, setGuiData] = useState(initialSettings);
+const DatGuiComponent = ({ guiData, setGuiData, setIsModalOpen }) => {
   const handleRandomize = () => {
     setGuiData({
       lines: parseInt(2 + Math.random() * 48),
@@ -25,6 +24,10 @@ const DatGuiComponent = ({ guiData, setGuiData }) => {
       fill: Math.random() * 1 > 0.3,
       crazyness: Math.random() * 1 > 0.9,
     });
+  };
+
+  const handleExport = () => {
+    setIsModalOpen((prev) => !prev);
   };
 
   return (
@@ -110,7 +113,7 @@ const DatGuiComponent = ({ guiData, setGuiData }) => {
           />
         </DatFolder>
         <DatButton label="Randomize" onClick={handleRandomize} />
-        <DatButton label="Export SVG" />
+        <DatButton label="Export SVG" onClick={handleExport} />
       </DatGui>
     </nav>
   );
@@ -135,6 +138,7 @@ DatGuiComponent.propTypes = {
     lightnessEndColor: PropTypes.number.isRequired,
   }),
   setGuiData: PropTypes.func.isRequired,
+  setIsModalOpen: PropTypes.func.isRequired,
 };
 
 DatGuiComponent.defaultProps = {
@@ -152,5 +156,6 @@ DatGuiComponent.defaultProps = {
     hueEndColor: 203,
     saturationEndColor: 90,
     lightnessEndColor: 14,
+    isModalOpen: false,
   },
 };
