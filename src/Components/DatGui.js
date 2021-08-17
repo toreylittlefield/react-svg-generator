@@ -156,6 +156,5 @@ DatGuiComponent.defaultProps = {
     hueEndColor: 203,
     saturationEndColor: 90,
     lightnessEndColor: 14,
-    isModalOpen: false,
   },
 };
