@@ -38,6 +38,53 @@ svg.stroke path {
   stroke-width: 1px;
 }
 
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50rem;
+  max-width: 90%;
+  z-index: 10;
+  background-color: white;
+  color: black;
+  transform: translate(-50%, -50%);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+.modal h3 {
+  font-size: 2.5rem;
+  text-align: center;
+  line-height: 1.15;
+}
+
+.codeContainer {
+  overflow: hidden;
+  background-color: rgb(23, 32, 38);
+  color: rgb(255, 255, 255);
+  border-radius: 0.5rem;
+}
+
+code {
+  white-space: nowrap;
+  color: white;
+  font-family: 'IBM Plex Mono', Menlo, mono;
+  font-size: 1rem;
+  line-height: 1.5;
+  display: block;
+  max-width: 100%;
+  overflow: scroll;
+  position: relative;
+  padding: 1.5rem 2.5rem 1.5rem 1.5rem;
+}
+
+.button-container {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  justify-content: space-evenly;
+  display: flex;
+}
+
 button {
   padding: 1em;
   margin: 0;
