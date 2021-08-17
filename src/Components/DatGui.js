@@ -11,7 +11,7 @@ const DatGuiComponent = ({ guiData, setGuiData }) => {
   //   const [guiData, setGuiData] = useState(initialSettings);
   const handleRandomize = () => {
     setGuiData({
-      lines: parseInt(5 + Math.random() * 45),
+      lines: parseInt(2 + Math.random() * 48),
       amplitudeX: parseInt(20 + Math.random() * 300),
       amplitudeY: parseInt(Math.random() * 200),
       hueStartColor: parseInt(Math.random() * 360),
@@ -31,7 +31,7 @@ const DatGuiComponent = ({ guiData, setGuiData }) => {
     <nav className="dat-gui">
       <DatGui data={guiData} onUpdate={setGuiData}>
         <DatFolder title="Settings">
-          <DatNumber path="lines" label="Lines" min={5} max={50} step={1} />
+          <DatNumber path="lines" label="Lines" min={2} max={50} step={1} />
           <DatNumber
             path="amplitudeX"
             label="AmplitudeX"
