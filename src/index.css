@@ -21,16 +21,14 @@ code {
 body {
   padding: 0;
   margin: 0;
-  height: 100vh;
+  min-height: 100vmax;
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
-  background: url(https://github.com/supahfunk/gradientwaves-svg/blob/master/dist/img/bg-gradient-wave.png?raw=true)
-    repeat center/cover;
 }
 
 svg {
-  width: 300vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vmax;
 }
 svg.path path {
   stroke: none;
