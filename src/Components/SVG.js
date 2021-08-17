@@ -29,7 +29,11 @@ const SVG = () => {
         guiData={guiData}
         setGuiData={setGuiData}
       />
-      <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <Modal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        guiData={guiData}
+      />
       <GenerateSVG guiData={guiData} />
     </main>
   );
