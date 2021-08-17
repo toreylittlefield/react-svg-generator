@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DatGuiComponent from './DatGui';
 import GenerateSVG from './GenerateSVG';
+import Modal from './Modal';
 
 const initialSettings = {
   lines: 42,
@@ -20,9 +21,15 @@ const initialSettings = {
 
 const SVG = () => {
   const [guiData, setGuiData] = useState(initialSettings);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <main>
-      <DatGuiComponent guiData={guiData} setGuiData={setGuiData} />
+      <DatGuiComponent
+        setIsModalOpen={setIsModalOpen}
+        guiData={guiData}
+        setGuiData={setGuiData}
+      />
+      <Modal isModalOpen={isModalOpen} />
       <GenerateSVG guiData={guiData} />
     </main>
   );
