@@ -1,13 +1,28 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import useGenerateSVG from '../Hooks/useGenerateSVG';
 import useWindowSize from '../Hooks/useWindowSize';
 
 const GenerateSVG = ({ guiData = {} }) => {
   const { winH, winW } = useWindowSize();
-  useEffect(() => {}, [guiData]);
-  useGenerateSVG({ ...guiData }, winH, winW);
-  return <svg id="svg" />;
+  const {
+    className = '',
+    backgroundColor = '',
+    paths = [],
+  } = useGenerateSVG(guiData, winH, winW);
+  return (
+    <svg id="svg" style={{ backgroundColor }} className={className}>
+      {paths?.map((path, index) => (
+        <path
+          // eslint-disable-next-line react/no-array-index-key
+          key={`path-${index}`}
+          stroke={path.stroke}
+          fill={path.fill}
+          d={path.d}
+        />
+      ))}
+    </svg>
+  );
 };
 
 export default GenerateSVG;
