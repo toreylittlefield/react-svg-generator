@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Modal = ({ isModalOpen }) => {
-  if (!isModalOpen) return null;
+const Modal = ({ isModalOpen, setIsModalOpen }) => {
+  const handleCloseModal = () => setIsModalOpen((prev) => !prev);
+  const handleClassName = isModalOpen ? 'modal' : 'modal open';
   return (
-    <div className="modal">
+    <div className={handleClassName}>
       <h3>Copy Or Download SVG</h3>
       <div className="code-container">
         <pre>
@@ -17,7 +18,7 @@ const Modal = ({ isModalOpen }) => {
           <button id="download" type="button">
             Download SVG
           </button>
-          <button id="close" type="button">
+          <button id="close" type="button" onClick={handleCloseModal}>
             Close
           </button>
         </div>
@@ -30,6 +31,7 @@ export default Modal;
 
 Modal.propTypes = {
   isModalOpen: PropTypes.bool.isRequired,
+  setIsModalOpen: PropTypes.func.isRequired,
 };
 
 // const createExportModal = async () => {
