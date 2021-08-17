@@ -2,32 +2,20 @@ import { useState, useEffect } from 'react';
 import chroma from 'chroma-js';
 
 const useGenerateSVG = (
-  settings = {
-    lines: 20,
-    amplitudeX: 100,
-    amplitudeY: 20,
-    offsetX: 10,
-    smoothness: 3,
-    fill: true,
-    crazyness: false,
-    hueStartColor: 53,
-    saturationStartColor: 74,
-    lightnessStartColor: 67,
-    hueEndColor: 216,
-    saturationEndColor: 100,
-    lightnessEndColor: 7,
-  },
-  winH = Number,
-  winW = Number
+  guiData = {},
+  winH = window.innerHeight,
+  winW = window.innerWidth
 ) => {
-  const [svgCreated, setSvgCreated] = useState();
+  const [svgCreated, setSvgCreated] = useState({
+    className: '',
+    paths: [],
+    backgroundColor: '',
+  });
   useEffect(() => {
-    let svg = document.getElementById('svg');
+    if (!guiData.lines) return;
     let Colors = [];
-    let Paths = [];
     let overflow;
-    let startColor;
-    let endColor;
+    const paths = { className: 'fill', backgroundColor: '', paths: [] };
     class Path {
       constructor(y, fill, offsetX) {
         this.rootY = y;
@@ -41,7 +29,7 @@ const useGenerateSVG = (
         let x = -overflow + offsetX;
         let y = 0;
         const { rootY } = this;
-        let upSideDown = 0;
+        let upSideDown = false;
 
         this.root.push({ x, y: rootY });
 
@@ -49,25 +37,23 @@ const useGenerateSVG = (
           let value = Math.random() > 0.5 ? 1 : -1;
 
           // Crazyness
-          if (settings.crazyness) {
+          if (guiData.crazyness) {
             x += parseInt(
-              (Math.random() * settings.amplitudeX) / 2 +
-                settings.amplitudeX / 2
+              (Math.random() * guiData.amplitudeX) / 2 + guiData.amplitudeX / 2
             );
             y =
               parseInt(
-                (Math.random() * settings.amplitudeY) / 2 +
-                  settings.amplitudeY / 2
+                (Math.random() * guiData.amplitudeY) / 2 +
+                  guiData.amplitudeY / 2
               ) *
                 value +
               rootY;
           } else {
             // Geometric
             upSideDown = !upSideDown;
-            value = upSideDown === 0 ? 1 : -1;
-
-            x += settings.amplitudeX;
-            y = settings.amplitudeY * value + rootY;
+            value = upSideDown ? 1 : -1;
+            x += guiData.amplitudeX;
+            y = guiData.amplitudeY * value + rootY;
           }
 
           this.root.push({ x, y });
@@ -79,18 +65,13 @@ const useGenerateSVG = (
       createPath() {
         const { root } = this;
         const { fill } = this;
-        const path = document.createElementNS(
-          'http://www.w3.org/2000/svg',
-          'path'
-        );
-        path.setAttribute('fill', fill);
-        path.setAttribute('stroke', fill);
-        svg.appendChild(path);
-        if (settings.fill) {
-          svg.setAttribute('class', 'path');
+        const path = {};
+        if (guiData.fill) {
+          path.fill = fill;
         } else {
-          svg.setAttribute('class', 'stroke');
+          path.fill = 'none';
         }
+        path.stroke = fill;
 
         // first & second points
         let d = `M -${overflow} ${winH + overflow}`;
@@ -100,7 +81,7 @@ const useGenerateSVG = (
         for (let i = 1; i < this.root.length - 1; i += 1) {
           const prevPoint = root[i - 1];
           const actualPoint = root[i];
-          const diffX = (actualPoint.x - prevPoint.x) / settings.smoothness;
+          const diffX = (actualPoint.x - prevPoint.x) / guiData.smoothness;
           const x1 = prevPoint.x + diffX;
           const x2 = actualPoint.x - diffX;
           const { x } = actualPoint;
@@ -115,63 +96,61 @@ const useGenerateSVG = (
         const reverseRoot = root.reverse();
         d += ` L ${reverseRoot[0].x} ${reverseRoot[0].y}`;
         root.reverse();
-
         // Last point
         d += ` L ${winW + overflow} ${winH + overflow}`;
 
         // Close path
         d += ` Z`;
-
-        path.setAttribute('d', d);
+        path.d = d;
+        return path;
       }
     }
-
-    function init() {
-      // Overflow
-      overflow = Math.abs(settings.lines * settings.offsetX);
-
+    const initColors = () => {
       // Colors
-      startColor = `hsl(${settings.hueStartColor}, ${settings.saturationStartColor}%, ${settings.lightnessStartColor}%)`;
-      endColor = `hsl(${settings.hueEndColor}, ${settings.saturationEndColor}%, ${settings.lightnessEndColor}%)`;
+      const startColor = `hsl(${guiData.hueStartColor}, ${guiData.saturationStartColor}%, ${guiData.lightnessStartColor}%)`;
+      const endColor = `hsl(${guiData.hueEndColor}, ${guiData.saturationEndColor}%, ${guiData.lightnessEndColor}%)`;
       Colors = chroma
         .scale([startColor, endColor])
         .mode('lch')
-        .colors(settings.lines + 2);
-
-      // Reset
-      Paths = [];
-      // eslint-disable-next-line no-unused-expressions
-      //   try {
-      //     document.body.removeChild(svg);
-      //   } catch (error) {
-      //     svg.remove();
-      //   }
-      svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('id', 'svg');
-      document.body.appendChild(svg);
-
+        .colors(guiData.lines + 2);
       // Background
-      if (settings.fill) {
+      if (guiData.fill) {
         const [firstColor] = Colors;
-        svg.style.backgroundColor = firstColor;
+        paths.className = 'fill';
+        paths.backgroundColor = firstColor;
       } else {
-        svg.style.backgroundColor = '#000';
+        paths.backgroundColor = '#000';
+        paths.className = 'stroke';
       }
-
-      // Lines
-      for (let i = 0; i < settings.lines + 1; i += 1) {
-        const rootY = parseInt((winH / settings.lines) * i);
-        const path = new Path(rootY, Colors[i + 1], settings.offsetX * i);
+    };
+    const createRootsInPaths = () => {
+      const Paths = [];
+      for (let i = 0; i < guiData.lines; i += 1) {
+        const rootY = parseInt((winH / guiData.lines) * i);
+        const path = new Path(rootY, Colors[i + 1], guiData.offsetX * i);
         Paths.push(path);
         path.createRoot();
       }
-      Paths.forEach((path) => {
-        path.createPath();
+      return Paths;
+    };
+    const initSVG = () => {
+      // Colors
+      initColors();
+      // Overflow
+      overflow = Math.abs(guiData.lines * guiData.offsetX);
+
+      // roots
+      const Roots = createRootsInPaths();
+      // paths
+      Roots.forEach((root) => {
+        const path = root.createPath();
+        paths.paths.push(path);
       });
-      setSvgCreated(svg);
-    }
-    init();
-  }, []);
+      return paths;
+    };
+    const results = initSVG();
+    setSvgCreated(results);
+  }, [winH, winW, guiData]);
   return svgCreated;
 };
 
