@@ -85,6 +85,7 @@ code {
   overflow: scroll;
   position: relative;
   padding: 1.5rem 2.5rem 1.5rem 1.5rem;
+  background-color: black;
 }
 
 .button-container {
