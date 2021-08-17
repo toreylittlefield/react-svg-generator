@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Modal = ({ isModalOpen, setIsModalOpen }) => {
   const handleCloseModal = () => setIsModalOpen((prev) => !prev);
-  const handleClassName = isModalOpen ? 'modal' : 'modal open';
+  const handleClassName = isModalOpen ? 'modal open' : 'modal';
   return (
     <div className={handleClassName}>
       <h3>Copy Or Download SVG</h3>
