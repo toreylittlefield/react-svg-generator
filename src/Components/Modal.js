@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import useSVGExport from '../Hooks/useSVGExport';
 
-const Modal = ({ isModalOpen, setIsModalOpen }) => {
+// eslint-disable-next-line react/prop-types
+const Modal = ({ isModalOpen, setIsModalOpen, guiData }) => {
   const handleCloseModal = () => setIsModalOpen((prev) => !prev);
   const handleClassName = isModalOpen ? 'modal open' : 'modal';
+  const svgCodeString = useSVGExport(isModalOpen, guiData);
   return (
     <div className={handleClassName}>
       <h3>Copy Or Download SVG</h3>
       <div className="code-container">
         <pre>
-          <code>Code Goes Here</code>
+          <code>{svgCodeString}</code>
         </pre>
         <div className="button-container">
           <button id="copy" type="button">
@@ -40,71 +43,6 @@ Modal.propTypes = {
 //   // 0 0 800 450
 
 //   // const svgSelector = document.querySelector('svg');
-//   const modal = document.createElement('div');
-//   const H3 = document.createElement('h3');
-//   const buttonContainer = document.createElement('div');
-//   const buttonCopy = document.createElement('button');
-//   buttonCopy.id = 'copy';
-//   buttonCopy.textContent = `Copy To Clipboard`;
-//   const buttonClose = document.createElement('button');
-//   buttonClose.id = 'close';
-//   buttonClose.textContent = `Close`;
-//   const buttonDownload = document.createElement('button');
-//   buttonDownload.id = 'download';
-//   buttonDownload.textContent = 'Download';
-//   const codeContainer = document.createElement('div');
-//   const preTag = document.createElement('pre');
-//   const code = document.createElement('code');
-//   buttonContainer.style.cssText = `
-//     padding-top: 2.5rem;
-//     padding-bottom: 2.5rem;
-//     justify-content: space-evenly;
-//     display: flex;
-
-//     `;
-//   codeContainer.style.cssText = `
-//     overflow: hidden;
-//     background-color: rgb(23, 32, 38);
-//     color: rgb(255, 255, 255);
-//     border-radius: 0.5rem;
-//     `;
-//   H3.textContent = `Copy SVG`;
-//   H3.style.cssText = `
-//     font-size: 2.5rem;
-//     text-align: center;
-//     line-height: 1.15;`;
-//   modal.style.cssText = `
-//     position: fixed;
-//     top: 50%;
-//     left: 50%;
-//     width: 50rem;
-//     max-width: 90%;
-//     z-index: 10;
-//     background-color: white;
-//     color: black;
-//     transform: translate(-50%, -50%);
-//     border-radius: 0.75rem;
-//     padding: 1.25rem;`;
-//   code.style.cssText = `
-//     white-space: nowrap;
-//     color: white;
-//     font-family: "IBM Plex Mono", Menlo, mono;
-//     font-size: 1rem;
-//     line-height: 1.5;
-//     display: block;
-//     max-width: 100%;
-//     overflow: scroll;
-//     position: relative;
-//     padding: 1.5rem 2.5rem 1.5rem 1.5rem;`;
-//   document.body.appendChild(modal);
-//   modal.appendChild(H3);
-//   modal.appendChild(codeContainer);
-//   modal.appendChild(buttonContainer);
-//   buttonContainer.appendChild(buttonCopy);
-//   buttonContainer.appendChild(buttonDownload);
-//   buttonContainer.appendChild(buttonClose);
-//   codeContainer.appendChild(preTag);
-//   preTag.appendChild(code);
 //   const clone = svgSelector.cloneNode(true);
 //   clone.setAttribute('viewBox', '0 0 800 430');
 //   clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
