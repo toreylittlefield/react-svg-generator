@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useSVGExport from '../Hooks/useSVGExport';
 
 // eslint-disable-next-line react/prop-types
 const Modal = ({ isModalOpen, setIsModalOpen, guiData }) => {
+  const [openCount, setOpenCount] = useState(0);
   const handleCloseModal = () => setIsModalOpen((prev) => !prev);
-  const handleClassName = isModalOpen ? 'modal open' : 'modal';
+  const handleClassName = isModalOpen ? 'modal open' : 'modal close';
+  useEffect(() => {
+    if (!isModalOpen) return;
+    setOpenCount((prev) => prev + 1);
+  }, [isModalOpen]);
+
   const {
     downloadSVG = () => {},
     copyToClipBoardSVG = () => {},
     code = '',
   } = useSVGExport(isModalOpen, guiData);
   return (
-    <div className={handleClassName}>
+    <div className={openCount > 0 ? handleClassName : 'modal'}>
       <h3>Copy Or Download SVG</h3>
       <div className="code-container">
         <pre>
