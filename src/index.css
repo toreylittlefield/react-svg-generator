@@ -49,6 +49,7 @@ svg.stroke path {
   z-index: 1;
   left: 50%;
   bottom: 30px;
+  transform: translate(-50%, -100%) scale(1);
 }
 
 .toast-message.open {
@@ -57,15 +58,17 @@ svg.stroke path {
 
 @keyframes fadeout {
   0% {
-    bottom: 0;
+    transform: translate(-50%, 100%) scale(1);
     opacity: 0;
+    visibility: hidden;
   }
   50% {
-    bottom: 30px;
+    visibility: visible;
+    transform: translate(-50%, -100%) scale(1);
     opacity: 1;
   }
   100% {
-    bottom: 30px;
+    transform: translate(-50%, -100%) scale(1);
     opacity: 1;
   }
 }
@@ -75,17 +78,48 @@ svg.stroke path {
   top: 50%;
   left: 50%;
   width: 50rem;
-  max-width: 90%;
-  z-index: 10;
+  max-width: 75%;
   background-color: white;
   color: black;
   border-radius: 0.75rem;
   padding: 1.25rem;
-  opacity: 0;
-  transition: transform 500ms ease-out, opacity 600ms ease-out;
-  transform: translate(150%, -50%) scale(0.5);
-  z-index: -1;
+  z-index: 1;
   visibility: hidden;
+  opacity: 0;
+}
+
+.modal.open {
+  animation: easeModalIn 1s forwards;
+}
+
+.modal.close {
+  animation: easeModalOut 1s forwards;
+}
+
+@keyframes easeModalOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    transform: translate(150%, -50%) scale(0.5);
+    visibility: hidden;
+  }
+}
+
+@keyframes easeModalIn {
+  from {
+    opacity: 0;
+    transform: translate(150%, -50%) scale(0.5);
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    visibility: visible;
+  }
 }
 
 .modal h3 {
@@ -148,11 +182,4 @@ button:focus {
   transform: scale(0.98);
   opacity: 1;
   background-color: rgba(64, 191, 128, 0.8);
-}
-
-.open {
-  visibility: visible;
-  opacity: 1;
-  z-index: 999;
-  transform: translate(-50%, -50%) scale(1);
 }
