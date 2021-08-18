@@ -1,17 +1,3 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 *,
 *:before,
 *:after {
@@ -23,7 +9,8 @@ body {
   margin: 0;
   min-height: 100vmax;
   overflow: hidden;
-  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 svg {
@@ -138,7 +125,7 @@ svg.stroke path {
 code {
   white-space: nowrap;
   color: white;
-  font-family: 'IBM Plex Mono', Menlo, mono;
+  font-weight: 200;
   font-size: 1rem;
   line-height: 1.5;
   display: block;
@@ -185,4 +172,8 @@ button:focus {
   transform: scale(0.98);
   opacity: 1;
   background-color: rgba(64, 191, 128, 0.8);
+}
+
+button#close {
+  background-color: rgb(182, 64, 50);
 }
