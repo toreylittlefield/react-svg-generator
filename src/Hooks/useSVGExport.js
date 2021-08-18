@@ -29,9 +29,12 @@ const useSVGExport = (isModalOpen, guiData) => {
     };
     const copyToClipBoardSVG = () => {
       const { clipboard } = window.navigator;
+      const toastToRemove = document.querySelector('.toast-message');
+      if (toastToRemove) toastToRemove.remove();
+      const toastSection = document.createElement('div');
+      toastSection.classList.add('toast-message', 'open');
+      document.body.appendChild(toastSection);
       if (!clipboard) {
-        const toastToRemove = document.querySelector('.toast-message');
-        if (toastToRemove) toastToRemove.remove();
         const codeSelector = document.querySelector('code');
         const input = document.createElement('input');
         input.type = 'text';
@@ -41,10 +44,6 @@ const useSVGExport = (isModalOpen, guiData) => {
         input.style.cssText = `opacity: 0; position: fixed;`;
         input.focus();
         input.select();
-        const toastSection = document.createElement('div');
-        toastSection.classList.add('toast-message', 'open');
-        document.body.appendChild(toastSection);
-
         try {
           const successful = document.execCommand('copy');
           const msg = successful
@@ -54,22 +53,21 @@ const useSVGExport = (isModalOpen, guiData) => {
         } catch (err) {
           toastSection.textContent = `Was not possible to copy the text: ${err}`;
         }
-        setTimeout(() => toastSection.remove(), 3000);
+
         input.remove();
       } else {
-        clipboard.writeText(code).catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err);
-        });
+        clipboard
+          .writeText(code)
+          .then(() => {
+            const msg = 'Copied To Clipboard';
+            toastSection.textContent = msg;
+          })
+          .catch((err) => {
+            // eslint-disable-next-line no-console
+            console.error(err);
+          });
       }
-      //   .then(
-      // function () {
-      //   /* clipboard successfully set */
-      // },
-      // function () {
-      //   /* clipboard write failed */
-      // }
-      //   );
+      setTimeout(() => toastSection.remove(), 3000);
     };
     setSvg({ downloadSVG, copyToClipBoardSVG, code });
   }, [isModalOpen, guiData]);
