@@ -38,6 +38,38 @@ svg.stroke path {
   stroke-width: 1px;
 }
 
+.toast-message {
+  visibility: hidden;
+  position: fixed;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+}
+
+.toast-message.open {
+  animation: fadeout 1.5s 2 alternate both;
+}
+
+@keyframes fadeout {
+  0% {
+    bottom: 0;
+    opacity: 0;
+  }
+  50% {
+    bottom: 30px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
 .modal {
   position: fixed;
   top: 50%;
@@ -53,12 +85,7 @@ svg.stroke path {
   transition: transform 500ms ease-out, opacity 600ms ease-out;
   transform: translate(150%, -50%) scale(0.5);
   z-index: -1;
-}
-
-.open {
-  opacity: 1;
-  z-index: 999;
-  transform: translate(-50%, -50%) scale(1);
+  visibility: hidden;
 }
 
 .modal h3 {
@@ -121,4 +148,11 @@ button:focus {
   transform: scale(0.98);
   opacity: 1;
   background-color: rgba(64, 191, 128, 0.8);
+}
+
+.open {
+  visibility: visible;
+  opacity: 1;
+  z-index: 999;
+  transform: translate(-50%, -50%) scale(1);
 }
