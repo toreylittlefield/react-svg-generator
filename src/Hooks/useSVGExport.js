@@ -8,6 +8,7 @@ const useSVGExport = (isModalOpen, guiData) => {
   });
   useEffect(() => {
     if (!isModalOpen) return svg;
+    // eslint-disable-next-line no-console
     console.count('hook ran');
     const svgSelector = document.querySelector('svg');
     if (!svgSelector) return;
