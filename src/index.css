@@ -152,13 +152,16 @@ code {
 .button-container {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
-  justify-content: space-evenly;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-row-gap: 1em;
+  grid-column-gap: 1em;
 }
 
 button {
   padding: 1em;
-  margin: 0;
+  margin: 0em 2em;
+  max-width: 80%;
   outline: none;
   border: none;
   background-color: rebeccapurple;
