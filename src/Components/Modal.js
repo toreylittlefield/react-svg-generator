@@ -6,19 +6,23 @@ import useSVGExport from '../Hooks/useSVGExport';
 const Modal = ({ isModalOpen, setIsModalOpen, guiData }) => {
   const handleCloseModal = () => setIsModalOpen((prev) => !prev);
   const handleClassName = isModalOpen ? 'modal open' : 'modal';
-  const svgCodeString = useSVGExport(isModalOpen, guiData);
+  const {
+    downloadSVG = () => {},
+    copyToClipBoardSVG = () => {},
+    code = '',
+  } = useSVGExport(isModalOpen, guiData);
   return (
     <div className={handleClassName}>
       <h3>Copy Or Download SVG</h3>
       <div className="code-container">
         <pre>
-          <code>{svgCodeString}</code>
+          <code>{code}</code>
         </pre>
         <div className="button-container">
-          <button id="copy" type="button">
+          <button id="copy" type="button" onClick={copyToClipBoardSVG}>
             Copy To Clipboard
           </button>
-          <button id="download" type="button">
+          <button id="download" type="button" onClick={downloadSVG}>
             Download SVG
           </button>
           <button id="close" type="button" onClick={handleCloseModal}>
