@@ -11,7 +11,12 @@ const GenerateSVG = ({ guiData = {} }) => {
     paths = [],
   } = useGenerateSVG(guiData, winH, winW);
   return (
-    <svg id="svg" style={{ backgroundColor }} className={className}>
+    <svg
+      id="svg"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ backgroundColor }}
+      className={className}
+    >
       {paths?.map((path, index) => (
         <path
           // eslint-disable-next-line react/no-array-index-key
