@@ -17,9 +17,10 @@ const initialSettings = {
   hueEndColor: 203,
   saturationEndColor: 90,
   lightnessEndColor: 14,
+  animate: false,
 };
 
-const SVG = () => {
+const Main = () => {
   const [guiData, setGuiData] = useState(initialSettings);
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
@@ -39,4 +40,4 @@ const SVG = () => {
   );
 };
 
-export default SVG;
+export default Main;
