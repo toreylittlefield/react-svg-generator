@@ -1,9 +1,9 @@
 import './App.css';
-import SVG from './Components/SVG';
+import Main from 'Components/Main';
 
 const App = () => (
   <div className="App">
-    <SVG />
+    <Main />
   </div>
 );
 
