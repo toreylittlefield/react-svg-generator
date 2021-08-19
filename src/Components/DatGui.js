@@ -23,6 +23,7 @@ const DatGuiComponent = ({ guiData, setGuiData, setIsModalOpen }) => {
       offsetX: parseInt(-20 + Math.random() * 40),
       fill: Math.random() * 1 > 0.3,
       crazyness: Math.random() * 1 > 0.9,
+      animate: guiData.animate,
     });
   };
 
@@ -112,6 +113,7 @@ const DatGuiComponent = ({ guiData, setGuiData, setIsModalOpen }) => {
             step={1}
           />
         </DatFolder>
+        <DatBoolean path="animate" label="Animate" />
         <DatButton label="Randomize" onClick={handleRandomize} />
         <DatButton label="Export SVG" onClick={handleExport} />
       </DatGui>
@@ -136,6 +138,7 @@ DatGuiComponent.propTypes = {
     hueEndColor: PropTypes.number.isRequired,
     saturationEndColor: PropTypes.number.isRequired,
     lightnessEndColor: PropTypes.number.isRequired,
+    animate: PropTypes.bool.isRequired,
   }),
   setGuiData: PropTypes.func.isRequired,
   setIsModalOpen: PropTypes.func.isRequired,
@@ -156,5 +159,6 @@ DatGuiComponent.defaultProps = {
     hueEndColor: 203,
     saturationEndColor: 90,
     lightnessEndColor: 14,
+    animate: false,
   },
 };
