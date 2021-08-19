@@ -1,3 +1,5 @@
+ [![Screenshot Animation](https://raw.githubusercontent.com/toreylittlefield/react-svg-generator/master/Docs/Media/SVG-Generator-Screenshot.gif)]https://raw.githubusercontent.com/toreylittlefield/react-svg-generator/master/Docs/Media/SVG-Generator-Screenshot.gif)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
