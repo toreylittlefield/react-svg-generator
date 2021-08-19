@@ -1,4 +1,4 @@
- [![Screenshot Animation](https://raw.githubusercontent.com/toreylittlefield/react-svg-generator/master/Docs/Media/SVG-Generator-Screenshot.gif)]https://raw.githubusercontent.com/toreylittlefield/react-svg-generator/master/Docs/Media/SVG-Generator-Screenshot.gif)
+ [![Screenshot Animation](https://raw.githubusercontent.com/toreylittlefield/react-svg-generator/master/Docs/Media/SVG-Generator-Screenshot.gif)](https://raw.githubusercontent.com/toreylittlefield/react-svg-generator/master/Docs/Media/SVG-Generator-Screenshot.gif)
 
 # Getting Started with Create React App
 
