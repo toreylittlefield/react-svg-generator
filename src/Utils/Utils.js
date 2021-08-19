@@ -63,31 +63,3 @@ export const downloadSVG = () => {
   aTag.remove();
   toastMessage('Downloading');
 };
-
-// // // const { gsap } = GSAP;
-
-// // // const animate = () => {
-// // //   const pathsSelector = document.querySelectorAll('path');
-// // //   let increment = 0;
-// // //   let percent = 1;
-// // //   gsap.to('path', {
-// // //     startFrom: {
-// // //       y: -300,
-// // //       x: -5,
-// // //       delay: -1,
-// // //     },
-// // //     y: -200,
-// // //     x: 5,
-// // //     duration: 2,
-// // //     stagger: {
-// // //       each: 0.1,
-// // //       from: 'edges',
-// // //       grid: 'auto',
-// // //       ease: 'sine.inOut',
-// // //       repeat: -1,
-// // //       yoyo: true,
-// // //     },
-// // //   });
-// // // };
-
-// // // animate()
