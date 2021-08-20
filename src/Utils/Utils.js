@@ -1,13 +1,3 @@
-const toastMessage = (msg = '') => {
-  const toastToRemove = document.querySelector('.toast-message');
-  if (toastToRemove) toastToRemove.remove();
-  const toastSection = document.createElement('div');
-  toastSection.classList.add('toast-message', 'open');
-  document.body.appendChild(toastSection);
-  toastSection.textContent = msg;
-  setTimeout(() => toastSection.remove(), 3000);
-};
-
 const clipboardFallBack = (code = '') => {
   try {
     const input = document.createElement('input');
@@ -23,9 +13,11 @@ const clipboardFallBack = (code = '') => {
       ? 'Copied To Clipboard'
       : 'Could Not Copy To Clipboard';
     input.remove();
-    toastMessage(msg);
+    // toastMessage(msg);
+    return msg;
   } catch (err) {
-    toastMessage(`Was not possible to copy the text: ${err}`);
+    // toastMessage(`Was not possible to copy the text: ${err}`);
+    return `Was not possible to copy the text: ${err}`;
   }
 };
 
@@ -33,24 +25,26 @@ export const copyToClipBoardSVG = () => {
   const codeSelector = document.querySelector('code');
   const code = codeSelector.textContent;
   const { clipboard } = window.navigator;
-  if (!clipboard) clipboardFallBack(code);
-  if (clipboard)
+  if (!clipboard) return clipboardFallBack(code);
+  if (clipboard) {
+    let msg = '';
     clipboard
       .writeText(code)
-      .then(() => {
-        const msg = 'Copied To Clipboard';
-        toastMessage(msg);
-      })
+      .then((msg = 'Copied To Clipboard'))
+      // toastMessage(msg);
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.error(err);
       });
+    return msg;
+  }
 };
 
 export const downloadSVG = () => {
   const svg = document.querySelector('#svg');
   if (!svg) {
-    return toastMessage('Cannot download. Not SVG Found');
+    // return toastMessage('Cannot download. Not SVG Found');
+    return 'Cannot download. Not SVG Found';
   }
   const blob = new Blob([svg.outerHTML], {
     type: 'image/svg+xml;charset=utf-8',
@@ -61,5 +55,6 @@ export const downloadSVG = () => {
   aTag.click();
   window.URL.revokeObjectURL(blob);
   aTag.remove();
-  toastMessage('Downloading');
+  // toastMessage('Downloading');
+  return 'Downloading';
 };
