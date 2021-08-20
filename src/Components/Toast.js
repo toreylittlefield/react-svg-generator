@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
 const Toast = ({ msg, setMsg }) => {
   const [classOpen, setClassOpen] = useState('');
   const [msgLog, setMsgLog] = useState([]);
@@ -39,3 +39,8 @@ const Toast = ({ msg, setMsg }) => {
 };
 
 export default Toast;
+
+Toast.propTypes = {
+  msg: PropTypes.string.isRequired,
+  setMsg: PropTypes.func.isRequired,
+};
