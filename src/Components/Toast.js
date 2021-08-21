@@ -39,7 +39,12 @@ const Toast = ({ msg, setMsg }) => {
     setMsg('');
   }, [msg]);
 
+  /**
+   *
+   * @param {Event} e
+   */
   const handleClose = (e) => {
+    if (e.currentTarget.parentElement.id === animate.parent.id) return;
     parent = e.currentTarget.parentElement;
     child = e.currentTarget;
     setAnimate({ parent, child });
