@@ -13,14 +13,16 @@ body {
   font-family: 'IBM Plex Sans', sans-serif;
 }
 
-svg {
+#svg {
   width: 100%;
   min-height: 100vmax;
 }
-svg.path path {
+
+#svg.path path {
   stroke: none;
 }
-svg.stroke path {
+
+#svg.stroke path {
   fill: none;
   stroke-width: 1px;
 }
@@ -31,12 +33,12 @@ svg.stroke path {
   background-color: #333;
   color: #fff;
   text-align: center;
-  border-radius: 2px;
-  padding: 16px;
+  border-radius: 0.25em;
+  padding: 20px;
   z-index: 1;
   left: 50%;
   bottom: 30px;
-  transform: translate(-50%, -100%) scale(1);
+  transform: translate(-50%, -100%);
 }
 
 .toast-message.open {
@@ -45,19 +47,28 @@ svg.stroke path {
 
 @keyframes fadeout {
   0% {
-    transform: translate(-50%, 100%) scale(1);
+    transform: translate(-50%, 100%);
     opacity: 0;
     visibility: hidden;
   }
   50% {
     visibility: visible;
-    transform: translate(-50%, -100%) scale(1);
+    transform: translate(-50%, -100%);
     opacity: 1;
   }
   100% {
-    transform: translate(-50%, -100%) scale(1);
+    transform: translate(-50%, -100%);
     opacity: 1;
   }
+}
+
+.feather.feather-x-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(300%, -150%);
+  padding: 0.25em;
+  cursor: pointer;
 }
 
 .modal {
